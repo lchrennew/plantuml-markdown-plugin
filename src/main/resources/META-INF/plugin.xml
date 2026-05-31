@@ -1,0 +1,33 @@
+<idea-plugin>
+    <id>com.github.plantuml.markdown-preview</id>
+    <name>PlantUML Markdown Preview</name>
+    <version>1.0.0</version>
+    <vendor email="lchrennew@126.com" url="https://github.com/lichun">Chun Li</vendor>
+
+    <description><![CDATA[
+    <p>Renders PlantUML code blocks as UML diagrams in Markdown preview.</p>
+    <p>Supports <code>plantuml</code> and <code>puml</code> fenced code blocks.</p>
+    <p>Uses built-in Smetana layout engine, no Graphviz installation required.</p>
+    <h3>Usage</h3>
+    <p>Simply write PlantUML code in a fenced code block in your Markdown file:</p>
+    <pre><code>```plantuml
+Bob -> Alice : hello
+```</code></pre>
+    <p>The diagram will be rendered automatically in the Markdown preview panel.</p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+    <ul>
+        <li>1.0.0 - Initial release with PlantUML rendering support in Markdown preview</li>
+    </ul>
+    ]]></change-notes>
+
+    <idea-version since-build="241" until-build="251.*"/>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.intellij.plugins.markdown</depends>
+
+    <extensions defaultExtensionNs="org.intellij.markdown">
+        <fenceGeneratingProvider implementation="com.github.plantuml.PlantUmlCodeFenceProvider"/>
+    </extensions>
+</idea-plugin>
