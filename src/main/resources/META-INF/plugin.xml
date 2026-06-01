@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.github.plantuml.markdown-preview</id>
     <name>PlantUML Markdown Preview</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <vendor email="lchrennew@126.com" url="https://github.com/lichun">Chun Li</vendor>
 
     <description><![CDATA[
@@ -18,11 +18,11 @@ Bob -> Alice : hello
 
     <change-notes><![CDATA[
     <ul>
-        <li>1.0.0 - Initial release with PlantUML rendering support in Markdown preview</li>
+        <li>1.0.1 - Update plugin version</li>
     </ul>
     ]]></change-notes>
 
-    <idea-version since-build="241" until-build="251.*"/>
+    <idea-version since-build="261" until-build="261.*"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>org.intellij.plugins.markdown</depends>

@@ -17,18 +17,31 @@ public final class PlantUmlRenderer {
 
     public static String renderToBase64Png(String plantUmlCode) {
         try {
-            String source = plantUmlCode.trim();
-            if (!source.startsWith("@start")) {
-                source = "@startuml\n!pragma layout smetana\n" + source + "\n@enduml";
-            } else if (!source.contains("!pragma layout")) {
-                source = source.replaceFirst("(@start\\w+)", "$1\n!pragma layout smetana");
+            // 强制使用 Smetana 布局引擎，避免依赖 GraphViz
+            // 通过系统属性 -Playout=smetana 来设置
+            String originalLayout = System.getProperty("layout");
+            System.setProperty("layout", "smetana");
+            
+            try {
+                String source = plantUmlCode.trim();
+                if (!source.startsWith("@start")) {
+                    source = "@startuml\n" + source + "\n@enduml";
+                }
+                
+                SourceStringReader reader = new SourceStringReader(source);
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                reader.outputImage(os, new FileFormatOption(FileFormat.PNG));
+                os.close();
+                byte[] imageBytes = os.toByteArray();
+                return Base64.getEncoder().encodeToString(imageBytes);
+            } finally {
+                // 恢复原来的系统属性
+                if (originalLayout != null) {
+                    System.setProperty("layout", originalLayout);
+                } else {
+                    System.clearProperty("layout");
+                }
             }
-            SourceStringReader reader = new SourceStringReader(source);
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            reader.outputImage(os, new FileFormatOption(FileFormat.PNG));
-            os.close();
-            byte[] imageBytes = os.toByteArray();
-            return Base64.getEncoder().encodeToString(imageBytes);
         } catch (Exception e) {
             LOG.warn("Failed to render PlantUML diagram", e);
             return null;
