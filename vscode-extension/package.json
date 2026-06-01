@@ -1,0 +1,49 @@
+{
+  "name": "plantuml-markdown-preview",
+  "displayName": "PlantUML Markdown Preview",
+  "description": "Renders PlantUML code blocks as UML diagrams in Markdown preview for VS Code",
+  "version": "1.0.1",
+  "publisher": "lchrennew",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "markdown.previewScripts": [
+      "./out/prerender.js"
+    ],
+    "markdown.previewStyles": [
+      "./styles.css"
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-cli": "^0.0.6",
+    "@vscode/test-electron": "^2.3.9"
+  },
+  "dependencies": {
+    "plantuml-encoder": "^1.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lchrennew/plantuml-markdown-plugin"
+  },
+  "license": "Apache-2.0"
+}
